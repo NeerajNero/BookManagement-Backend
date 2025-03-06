@@ -2,11 +2,16 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { initializeDatabase } from './db.connect/db.connect.js'
 import bookRoutes from './routes/book.routes.js'
+import cors from 'cors'
 
 const app = express()
 dotenv.config()
 
 initializeDatabase()
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
 
 app.use(express.json())
 

@@ -40,3 +40,18 @@ export const deleteBook = async(req,res) => {
         res.status(500).json({error: "internal server error",errorMessage: error.message})
     }
 }
+
+export const updateStatus = async(req,res) => {
+    try{
+       const {bookId} = req.body
+       const findBook = await Book.findById(bookId)
+       if(!findBook){
+            return res.status(404).json({message: "book not found"})
+       }
+       const updateBookStatus = await Book.findByIdAndUpdate(bookId, {$set: {status: !findBook.status}},{new : true})
+       res.status(200).json({message: "status updated", book: updateBookStatus})
+    }catch(error){
+        console.log("error occured while fetching books")
+        res.status(500).json({error: "internal server error",errorMessage: error.message})
+    }
+}
