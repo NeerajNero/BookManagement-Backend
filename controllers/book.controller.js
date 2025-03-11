@@ -9,7 +9,7 @@ export const addBook = async(req,res) => {
         }
         res.status(201).json({message: "Book added successfully", book: saveBook})
     }catch(error){
-        console.log("error occured while adding book")
+        console.log("error occured while adding book.")
         res.status(500).json({error: "internal server error",errorMessage: error.message})
     }
 }
